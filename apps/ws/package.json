@@ -10,8 +10,10 @@
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
+    "@repo/common": "workspace:*",
     "@repo/db": "workspace:*",
-    "@types/ws": "^8.18.0"
+    "@types/ws": "^8.18.0",
+    "@repo/be-common":"workspace:*"
   },
   "keywords": [],
   "author": "",
