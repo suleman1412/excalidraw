@@ -77,12 +77,10 @@ authRouter.post('/signin', async (req: Request, res: Response) => {
         const token = jwt.sign({
             id: User.id
         }, JWT_SECRET)
-        res.cookie('token', token, {
-            httpOnly: true,
-            sameSite: 'strict',
-        })
+
         res.status(200).json({
-            message: "Signin successful"
+            message: "Signin successful",
+            token
         })
     } catch (e) {
         res.status(500).json({
