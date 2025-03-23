@@ -23,7 +23,7 @@ const authenticateToken = (req: Request, res: Response, next: NextFunction): voi
     req.userId = decoded.id
     // console.log(decoded.id)
 
-    next() 
+    next()
   } catch (err) {
     res.status(401).json({ message: "Unauthorized. Invalid token." })
     return

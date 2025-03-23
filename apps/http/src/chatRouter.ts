@@ -4,10 +4,10 @@ import { Request, Response, Router } from "express";
 
 export const chatRouter: Router = Router()
 
-chatRouter.get('/:roomId', async(req: Request, res: Response) => {
-    try{
+chatRouter.get('/:roomId', async (req: Request, res: Response) => {
+    try {
         const { success, data, error } = roomIdSchema.safeParse(req.params)
-        if(!success){
+        if (!success) {
             res.status(400).json({
                 message: "Not a CUID",
                 error
@@ -18,7 +18,7 @@ chatRouter.get('/:roomId', async(req: Request, res: Response) => {
             where: { id: data.roomId }
         })
 
-        if(!room){
+        if (!room) {
             res.status(400).json({
                 message: "Room doesnt exist"
             })
@@ -30,12 +30,12 @@ chatRouter.get('/:roomId', async(req: Request, res: Response) => {
         })
 
         console.log(chats)
-        
-        res.status(200).json({ 
+
+        res.status(200).json({
             roomId: room.id,
             chats
         })
-    } catch(e){
+    } catch (e) {
         res.status(500).json({
             message: "Internal Server Error",
             e
