@@ -3,8 +3,13 @@ import authRouter from './authRouter';
 import roomRouter from './roomRouter';
 import authenticateToken from './middleware';
 import { chatRouter } from './chatRouter';
+import cors from 'cors'
 
 export const app: Application = express()
+
+app.use(cors({
+  origin: 'http://localhost:3000', 
+}))
 
 app.use(express.json())
 app.use('/api/auth/', authRouter)
