@@ -8,34 +8,29 @@ datasource db {
 }
 
 model User {
-  id        String @id @default(uuid())
-  username  String @unique
+  id        String  @id @default(uuid())
+  username  String  @unique
   password  String
   photo     String?
-
-  rooms     Room[]
   sentChats Chats[]
+  rooms     Room[]
 }
 
-model Room{
-  id                String  @id @default(cuid())
-  name              String
-  ownerId           String
-  owner             User    @relation(fields: [ownerId], references: [id])
-
-  existingChats     Chats[]
-  createdAt         DateTime @default(now())
+model Room {
+  id            String   @id @default(cuid())
+  name          String
+  ownerId       String
+  createdAt     DateTime @default(now())
+  existingChats Chats[]
+  owner         User     @relation(fields: [ownerId], references: [id])
 }
 
-model Chats{
-  id          Int  @id @default(autoincrement())
-  
-  roomId      String
-  room        Room    @relation(fields: [roomId], references: [id])
-  
-  senderId    String
-  sender      User    @relation(fields: [senderId], references: [id])
-  
-  message     String
-  createdAt   DateTime @default(now())
+model Chats {
+  id        Int      @id @default(autoincrement())
+  roomId    String
+  senderId  String
+  message   String
+  createdAt DateTime @default(now())
+  room      Room     @relation(fields: [roomId], references: [id])
+  sender    User     @relation(fields: [senderId], references: [id])
 }
