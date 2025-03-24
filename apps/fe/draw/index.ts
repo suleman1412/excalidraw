@@ -1,6 +1,5 @@
 import axios from "axios";
 import { RefObject, useRef } from "react";
-import { prismaClient } from '@repo/db/client'
 
 type Shape = {
   type: "rect";
@@ -90,9 +89,9 @@ const getExisitngShapes = async (roomId: string) => {
       Authorization: `Bearer ${token}`
     }
   });
-  const messages: Shape[] = res.data.chats
+  const messages = res.data.chats
 
-  const shapes = messages.map(x => {
+  const shapes = messages.map((x: { message: string; }) => {
     return JSON.parse(x.message)
   })
   console.log('Shapes in getExistingShapes() : ', shapes)  
