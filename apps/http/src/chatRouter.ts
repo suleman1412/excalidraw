@@ -26,7 +26,11 @@ chatRouter.get('/:roomId', async (req: Request, res: Response) => {
         }
 
         const chats = await prismaClient.chats.findMany({
-            where: { roomId: room?.id }
+            where: { roomId: room?.id },
+            take: 10,
+            orderBy: {
+                createdAt: 'desc'
+            }
         })
 
         console.log(chats)
